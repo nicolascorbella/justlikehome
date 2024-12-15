@@ -8,10 +8,6 @@
       {
         "src": "views/index.html",
         "use": "@vercel/static"
-      },
-      {
-        "src": "public/**",
-        "use": "@vercel/static"
       }
     ],
     "routes": [
