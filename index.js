@@ -4,13 +4,13 @@ const fs = require("fs-extra");
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
 
-// Middleware para manejar JSON
+// Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-// Configuración de Multer para la subida de carpetas
+// Configuración de Multer (para manejar subida de archivos)
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const folderName = req.body.folderName || "default";
@@ -25,42 +25,35 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Ruta para obtener las propiedades JSON
-app.get("/listings", (req, res) => {
-  const filePath = path.join(__dirname, "data/listings.json");
-  const listings = fs.readJsonSync(filePath, { throws: false }) || [];
-  res.json(listings);
-});
-
-// Ruta para subir una carpeta y actualizar el JSON
+// Ruta para subir una carpeta
 app.post("/upload-folder", upload.array("files"), (req, res) => {
-  const folderName = req.body.folderName || "default";
-  const filePath = path.join(__dirname, "data/listings.json");
+  try {
+    const folderName = req.body.folderName || "default";
+    const filePath = path.join(__dirname, "data/departamentos.json");
 
-  // Leer o inicializar el archivo JSON
-  let listings = fs.readJsonSync(filePath, { throws: false }) || [];
+    // Leer o inicializar el archivo JSON
+    let listings = fs.readJsonSync(filePath, { throws: false }) || [];
 
-  // Añadir cada archivo como una nueva propiedad en el JSON
-  req.files.forEach((file, index) => {
-    listings.push({
-      id: listings.length + 1,
-      img: `uploads/${folderName}/${file.filename}`,
-      location: req.body.location || "Sin ubicación",
-      price: req.body.price || "Sin precio",
-      description: req.body.description || "Sin descripción",
+    // Añadir cada archivo subido al JSON
+    req.files.forEach((file) => {
+      listings.push({
+        id: listings.length + 1,
+        img: `uploads/${folderName}/${file.filename}`,
+        location: req.body.location || "Sin ubicación",
+        price: req.body.price || "Sin precio",
+        description: req.body.description || "Sin descripción",
+      });
     });
-  });
 
-  // Guardar el JSON actualizado
-  fs.writeJsonSync(filePath, listings, { spaces: 2 });
+    // Guardar JSON actualizado
+    fs.writeJsonSync(filePath, listings, { spaces: 2 });
 
-  res.json({
-    message: "Carpeta subida correctamente y JSON actualizado.",
-    listings,
-  });
+    res.status(200).json({ message: "Archivos subidos correctamente", listings });
+  } catch (error) {
+    console.error("Error en el servidor:", error);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
 });
 
-// Iniciar el servidor
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+// Exportar la app (compatible con Vercel serverless functions)
+module.exports = app;
