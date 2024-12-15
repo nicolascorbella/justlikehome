@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subir Carpeta - Just Like Home</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      color: #305ef2;
+    }
+
+    form {
+      width: 90%;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    input, textarea, button {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    button {
+      background: #305ef2;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #2548c0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Subir Carpeta de Archivos</h1>
+
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="text" name="folderName" placeholder="Nombre del Departamento" required />
+    <input type="text" name="location" placeholder="Ubicación" required />
+    <input type="text" name="price" placeholder="Precio" required />
+    <textarea name="description" placeholder="Descripción" required></textarea>
+    <label>Seleccionar una carpeta:</label>
+    <input type="file" name="files" webkitdirectory multiple required />
+    <button type="submit">Subir Carpeta</button>
+  </form>
+
+  <script>
+    document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+
+      try {
+        const response = await fetch("/upload-folder", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) throw new Error("Error en el servidor.");
+
+        const result = await response.json();
+        console.log(result);
+        alert("Carpeta subida con éxito.");
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Error al subir la carpeta.");
+      }
+    });
+  </script>
+</body>
+</html>
