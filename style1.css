@@ -31,6 +31,7 @@
   margin-left: 15px;
 }
 
+ 
   /*# sourceMappingURL=styles.css.map */
   * { 
       margin: 0;
@@ -40,8 +41,8 @@
   
   /* Variables CSS */
   :root {
-      --color-terciario: #E72024;
-      --color-secundario: #FFFFFF;
+      --color-terciario: #294c52;
+      --color-secundario: #c09841;
       --color-primario: #c8c8c8;
       --color-footer: #97A2A3;
       --animation-timing: 300ms ease-in-out;
@@ -50,7 +51,6 @@
     overflow: hidden;
     height: 100%;
   }
-
   .outer-headings {
     height: 100vh;
     display: flex;
@@ -61,7 +61,7 @@
     color: var(--color-secundario);
     text-shadow: 4px 4px 3px var(--color-terciario);
     width: 100%;
- }
+}
 li:hover{
     transform: scale(1.0);
     animation: ease 1s;
@@ -114,7 +114,7 @@ margin-right: 8px;
     padding:7px;
     border: none;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
     border-radius: 5px;
     height: 2.9em;
     width: 100%;
@@ -749,62 +749,49 @@ text-align: center;
 
 
 .card-img {
-    display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+object-fit: cover;
+}
+
+
+
+.card-img{
     margin: 0 auto;
-    border-radius: 8px; /* si querés bordes redondos */
 }
 
 .card-location a {
-    display: inline-block;
-    color: #000;
+    color: black;
     text-decoration: none;
-    font-weight: 700;
-    font-size: 1.25rem;
-    margin-top: 1.5rem;
-    transition: color 0.3s ease;
-}
-
-.card-location a:hover {
-    color: var(--color-terciario);
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 2em;
 }
 
 .card-price {
-    font-size: 1.2rem;
+    font-size: 1.2em;
     color: var(--color-terciario);
-    margin-top: 0.8rem;
-    font-weight: 600;
+    margin-top: 15px;
 }
 
-.card-service,
-.card-description {
-    font-size: 0.9rem;
+.card-service, .card-description {
+    font-size: 0.9em;
     color: #202a33;
-    margin-top: 1rem;
-    line-height: 1.4;
+    margin-top: 15px;
 }
 
 .card-description {
-    margin-top: 0.6rem;
+    margin-top: 10px;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* limita a 2 líneas */
+    -webkit-line-clamp: 2;      /* Número de líneas a mostrar antes de truncar */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.card-content {
-    position: relative;
+.card-content{
     z-index: 10;
-    color: #000;
-    padding: 1rem;
-}
-
-/* Opcional: para que la card tenga un hover sutil */
-.card:hover .card-content {
-    color: var(--color-terciario);
+    color: black;
 }
 /* Contenedor del botón */
 .rent-button-container {
@@ -1404,4 +1391,5 @@ margin-top: 3%;
         min-width: 10em;
     }
   }
+
 
