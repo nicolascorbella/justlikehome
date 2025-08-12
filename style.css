@@ -1,0 +1,272 @@
+/* General */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f7fa; /* Fondo suave */
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Contenedor principal de departamentos */
+#departamentos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    margin: auto;
+    max-width: 1200px;
+}
+
+/* Estilo para cada tarjeta */
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.card-body {
+    padding: 15px;
+    text-align: left;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #305EF2;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 0 0 10px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Botones en cada tarjeta */
+.card button {
+    margin-right: 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #305EF2;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    padding: 8px 12px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #003EBB;
+}
+
+.btn-danger {
+    background-color: #FF4D4F;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    padding: 8px 12px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #D9363E;
+}
+
+/* Mensaje sin departamentos */
+.text-muted {
+    text-align: center;
+    font-style: italic;
+    color: #6c757d;
+}
+/* Contenedor del formulario */
+#edit-container {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#edit-container:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+/* Títulos */
+#edit-container h2 {
+    color: #305EF2;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Etiquetas */
+#edit-container label {
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Inputs y Textareas */
+#edit-container .form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#edit-container .form-control:focus {
+    border-color: #305EF2;
+    box-shadow: 0 0 5px rgba(48, 94, 242, 0.5);
+}
+
+/* Select */
+#edit-container select.form-control {
+    appearance: none;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"%3E%3Cpath fill-rule="evenodd" d="M1.646 5.646a.5.5 0 0 1 .708 0L8 11.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    padding-right: 30px;
+}
+
+/* Botones */
+#edit-container .btn {
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#edit-container .btn-success {
+    background-color: #28a745;
+    border: none;
+    color: white;
+}
+
+#edit-container .btn-success:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+#edit-container .btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    color: white;
+}
+
+#edit-container .btn-secondary:hover {
+    background-color: #545b62;
+    transform: translateY(-2px);
+}
+
+/* Espaciado entre elementos */
+#edit-container .mb-2 {
+    margin-bottom: 15px;
+}
+      /* Estilo básico del carrusel */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 600px;
+            margin: 50px auto;
+            overflow: hidden;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+        }
+
+        /* Controles del carrusel */
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-control {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .carousel-control:focus {
+            outline: none;
+        }
+
+        .carousel-dots {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .carousel-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .carousel-dot.active {
+            background-color: #555;
+        }
+        .carousel-container,.carousel-dot.active,.carousel-dot,.carousel-control,.carousel-controls,.carousel-slides {
+          
+            z-index: 2;
+           
+        }

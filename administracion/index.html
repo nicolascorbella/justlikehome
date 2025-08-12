@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustLikeHome - Administración</title>
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Bootstrap CSS -->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Modal de Inicio de Sesión -->
+    <div id="loginModal" class="modal" style="display: none;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Inicio de Sesión</h5>
+                </div>
+                <div class="modal-body">
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" class="form-control mb-2" placeholder="Nombre de usuario">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" class="form-control mb-2" placeholder="Contraseña">
+                    <div id="loginError" style="color: red; display: none;">Usuario o contraseña incorrectos.</div>
+                </div>
+                <div class="modal-footer">
+                    <button id="loginBtn" class="btn btn-primary">Iniciar Sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        /* Modal en pantalla completa */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-dialog {
+            width: 400px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .modal-header, .modal-footer {
+            padding: 10px;
+            background-color: #f1f1f1;
+        }
+        .modal-body {
+            padding: 20px;
+        }
+        .container {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border: 1px solid #e0e0e0; /* Borde ligero */
+    border-radius: 12px; /* Bordes más redondeados */
+    background-color: #fff; /* Fondo blanco */
+    padding: 2rem; /* Más espacio interno */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Mayor sombra al pasar el mouse */
+    transform: translateY(-5px); /* Efecto sutil de elevación */
+}
+
+    </style>
+
+
+
+
+<!-- Formulario de creación de departamentos -->
+<div class="container my-4 p-4 shadow-lg bg-white rounded">
+    <h1 class="text-center mt-4">Administración de Departamentos</h1>
+    <h2>Crear Departamento</h2>
+    <form id="createForm">
+        <!-- Ubicación -->
+        <label for="location">Ubicación:</label>
+        <input type="text" name="location" class="form-control mb-2" placeholder="Ej: Palermo" required>
+
+        <!-- Precio -->
+        <label for="price">Precio:</label>
+        <input type="text" name="price" class="form-control mb-2" placeholder="Ej: $590 USD" required>
+
+        <!-- Descripción -->
+        <label for="description">Descripción:</label>
+        <textarea name="description" class="form-control mb-2" placeholder="Ej: Departamento con 2 ambientes..." required></textarea>
+
+        <!-- Status -->
+        <label for="status">Status:</label>
+        <select name="status" class="form-control mb-2" required>
+            <option value="card">Card</option>
+            <option value="nodisponible">No Disponible</option>
+        </select>
+ <!-- ambientes -->
+        <label for="ambientes">cantidad de ambientes:</label>
+        <select name="ambientes" class="form-control mb-2" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+        </select>
+
+
+        <!-- Casilla para el iframe -->
+        <label for="iframe">Iframe:</label>
+        <textarea id="iframe" name="iframe" class="form-control mb-2" placeholder="Inserta el iframe de Google Maps aquí"></textarea>
+
+        <!-- Nombre de la carpeta -->
+        <label for="folderName">Nombre de la Carpeta:</label>
+        <input type="text" name="folderName" id="folderName" class="form-control mb-2" placeholder="Ej: paraguayycharcas" required>
+
+        <!-- Subida de carpeta -->
+        <label for="folderInput">Subir Carpeta de Imágenes:</label>
+        <input type="file" id="folderInput" name="files[]" class="form-control mb-2" webkitdirectory directory multiple>
+
+        <!-- Botón de enviar -->
+        <button type="submit" class="btn btn-success">Crear Departamento</button>
+    </form>
+</div>
+
+
+<!-- Contenedor para mostrar los departamentos -->
+<div id="departamentos-container" class="container my-4">
+    <h2>Departamentos Disponibles</h2>
+    <div class="row" id="cards-container"></div>
+</div>
+
+<!-- Contenedor del formulario de edición -->
+<div id="edit-container" class="container my-4" style="display: none;">
+    <h2>Editar Departamento</h2>
+    <form id="editForm">
+        <input type="hidden" name="id">
+        <div class="mb-3">
+            <label for="location">Ubicación:</label>
+            <input type="text" name="location" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="price">Precio:</label>
+            <input type="text" name="price" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="description">Descripción:</label>
+            <textarea name="description" rows="3" class="form-control" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+        <button type="button" id="cancelEdit" class="btn btn-secondary">Cancelar</button>
+    </form>
+</div>
+
+
+    <!-- Scripts -->
+    <script>document.addEventListener("DOMContentLoaded", () => {
+    const apiUrl = "crud_departamentos.php";
+    const createForm = document.getElementById("createForm");
+
+    // Función para cargar departamentos
+    async function cargarDepartamentos() {
+    try {
+        const response = await fetch(`${apiUrl}?action=read`);
+
+        const contentType = response.headers.get("Content-Type");
+        if (!contentType || !contentType.includes("application/json")) {
+            const text = await response.text();
+            console.error("La respuesta no es JSON:", text);
+            alert("El servidor devolvió una respuesta inesperada.");
+            return;
+        }
+
+        const departamentos = await response.json();
+        console.log("Respuesta del servidor:", departamentos);
+
+        if (!Array.isArray(departamentos)) throw new Error("La respuesta no es un array.");
+
+        renderizarDepartamentos(departamentos);
+    } catch (error) {
+        console.error("Error al cargar departamentos:", error);
+        alert("No se pudieron cargar los departamentos.");
+    }
+}
+
+
+    // Renderizar departamentos en el DOM
+    function renderizarDepartamentos(departamentos) {
+        const container = document.getElementById("cards-container");
+        container.innerHTML = "";
+
+        if (!departamentos || departamentos.length === 0) {
+            container.innerHTML = '<p class="text-muted">No hay departamentos disponibles.</p>';
+            return;
+        }
+
+        departamentos.forEach(dep => {
+            const card = `
+                <div class="col-md-4">
+                <a href="${dep.url}">
+                 <div class="card mb-4 shadow-sm">
+                <img src="../departamentos/${dep.img}" class="card-img-top" alt="${dep.location}">
+                </a>
+                <div class="card-body">
+                <h5 class="card-title">${dep.location}</h5>
+                <p><strong>Precio:</strong> ${dep.price}</p>
+                <p><strong>Descripción:</strong> ${dep.description}</p>
+                <p><strong>ID:</strong> ${dep.id}</p>
+                <p><strong>Status:</strong> ${dep.status}</p>
+                <p><strong>Ambientes:</strong> ${dep.ambientes}</p>
+                <button class="btn btn-primary mb-2" onclick="editarDepartamento(${dep.id})">Editar</button>
+                <button class="btn btn-danger" onclick="eliminarDepartamento(${dep.id})">Eliminar</button>
+                 </div>
+                 </div>
+                    
+                    </div>
+
+            `;
+            container.insertAdjacentHTML("beforeend", card);
+        });
+    }
+
+    // Función para crear un departamento
+    async function crearDepartamento(departamento, formData = null) {
+        try {
+            const response = await fetch(formData ? "create.php" : `${apiUrl}?action=create`, {
+                method: "POST",
+                headers: formData ? {} : { "Content-Type": "application/json" },
+                body: formData ? formData : JSON.stringify(departamento)
+            });
+
+            const result = await response.text();
+            console.log("Respuesta del servidor (create):", result);
+
+            if (result.includes("Datos y archivos subidos correctamente") || result.includes("Departamento creado")) {
+                alert(result);
+                cargarDepartamentos(); // Recargar lista
+                if (!formData) createForm.reset();
+            } else {
+                alert("Error al crear el departamento: " + result);
+            }
+        } catch (error) {
+            console.error("Error al crear el departamento:", error);
+            alert("Ocurrió un error inesperado al crear el departamento.");
+        }
+    }
+
+    // Evento para el formulario de creación
+   // Evento para el formulario de creación
+if (createForm) {
+    createForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const departamento = {
+            location: e.target.location.value,
+            price: e.target.price.value,
+            description: e.target.description.value,
+            status: e.target.status.value,
+            ambientes: e.target.ambientes.value,
+            iframe: e.target.iframe.value // acá estás leyendo el iframe del textarea
+        };
+
+        // Verificar si existe el input de carpeta y si tiene archivos
+        const folderName = document.getElementById("folderName")?.value.trim();
+        const folderInput = document.getElementById("folderInput");
+
+        if (folderInput?.files.length > 0) {
+            // Preparar FormData para subir carpeta
+            const formData = new FormData();
+            formData.append("folderName", folderName);
+
+            Array.from(folderInput.files).forEach(file => {
+                formData.append("files[]", file);
+            });
+
+            formData.append("price", departamento.price);
+            formData.append("status", departamento.status);
+            formData.append("description", departamento.description);
+            formData.append("location", departamento.location);
+            formData.append("iframe", departamento.iframe);
+            formData.append("ambientes", departamento.ambientes);
+
+            await crearDepartamento(null, formData); // Crear con archivos
+        } else {
+            // Si no hay carpeta, enviar solo datos simples
+            departamento.img = e.target.img?.value || ""; // Opcional, si existe
+            await crearDepartamento(departamento); // Crear con datos
+        }
+    });
+}
+
+
+    // Editar un departamento
+    window.editarDepartamento = async function (id) {
+        try {
+            const response = await fetch(`${apiUrl}?action=read`);
+            if (!response.ok) throw new Error("Error al obtener los departamentos.");
+
+            const departamentos = await response.json();
+            const departamento = departamentos.find(dep => parseInt(dep.id) === parseInt(id));
+
+            if (!departamento) {
+                alert("Departamento no encontrado.");
+                return;
+            }
+
+            mostrarFormularioEdicion(departamento);
+        } catch (error) {
+            console.error("Error al cargar el departamento:", error);
+        }
+    };
+
+    function mostrarFormularioEdicion(dep) {
+        const form = document.getElementById("editForm");
+        const editContainer = document.getElementById("edit-container");
+        editContainer.style.display = "block";
+
+        form.innerHTML = `
+            <input type="hidden" name="id" value="${dep.id}">
+            <label>Ubicación:</label>
+            <input type="text" name="location" value="${dep.location}" class="form-control mb-2" required>
+            <label>Precio:</label>
+            <input type="text" name="price" value="${dep.price}" class="form-control mb-2" required>
+            <label>Descripción:</label>
+            <textarea name="description" class="form-control mb-2" required>${dep.description}</textarea>
+            <label>Status:</label>
+            <select name="status" class="form-control mb-2">
+                <option value="card" ${dep.status === "card" ? "selected" : ""}>Card</option>
+                <option value="nodisponible" ${dep.status === "nodisponible" ? "selected" : ""}>No Disponible</option>
+            </select>
+            <label>Ambientes:</label>
+            <select name="ambientes" class="form-control mb-2">
+                <option value="1" ${dep.ambientes === "1" ? "selected" : ""}>1</option>
+                <option value="2" ${dep.ambientes === "2" ? "selected" : ""}>2</option>
+                <option value="2" ${dep.ambientes === "3" ? "selected" : ""}>3</option>
+                <option value="2" ${dep.ambientes === "4" ? "selected" : ""}>4</option>
+            </select>
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <button type="button" class="btn btn-secondary" onclick="cerrarFormulario()">Cancelar</button>
+        `;
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            formData.append("action", "update");
+
+            try {
+                const response = await fetch(apiUrl, { method: "POST", body: formData });
+                const result = await response.json();
+                if (result.success) {
+                    alert(result.success);
+                    cerrarFormulario();
+                    cargarDepartamentos();
+                } else {
+                    alert("Error al actualizar el departamento.");
+                }
+            } catch (error) {
+                console.error("Error al actualizar:", error);
+            }
+        });
+    }
+
+    window.cerrarFormulario = () => document.getElementById("edit-container").style.display = "none";
+
+    // Eliminar un departamento
+    window.eliminarDepartamento = async function (id) {
+        if (!confirm("¿Deseas eliminar este departamento?")) return;
+        try {
+            const response = await fetch("delete.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ action: "delete", id })
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert(result.success);
+                cargarDepartamentos();
+            } else {
+                alert("Error al eliminar el departamento.");
+            }
+        } catch (error) {
+            console.error("Error al eliminar:", error);
+        }
+    };
+
+    cargarDepartamentos();
+});
+</script>
+
+</body>
+</html>
