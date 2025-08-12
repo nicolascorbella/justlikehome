@@ -1,4 +1,35 @@
 
+#development-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #f8d7da; /* color rosa claro tipo alerta */
+  color: #721c24; /* texto rojo oscuro */
+  border: 1px solid #f5c6cb;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-weight: bold;
+  z-index: 9999;
+  max-width: 300px;
+  font-family: Arial, sans-serif;
+  cursor: default;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#development-popup button.close-popup {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: #721c24;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  margin-left: 15px;
+}
 
   /*# sourceMappingURL=styles.css.map */
   * { 
