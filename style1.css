@@ -718,49 +718,62 @@ text-align: center;
 
 
 .card-img {
+    display: block;
     width: 100%;
     height: 100%;
-object-fit: cover;
-}
-
-
-
-.card-img{
+    object-fit: cover;
     margin: 0 auto;
+    border-radius: 8px; /* si querés bordes redondos */
 }
 
 .card-location a {
-    color: black;
+    display: inline-block;
+    color: #000;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2em;
-    margin-top: 2em;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.card-location a:hover {
+    color: var(--color-terciario);
 }
 
 .card-price {
-    font-size: 1.2em;
+    font-size: 1.2rem;
     color: var(--color-terciario);
-    margin-top: 15px;
+    margin-top: 0.8rem;
+    font-weight: 600;
 }
 
-.card-service, .card-description {
-    font-size: 0.9em;
+.card-service,
+.card-description {
+    font-size: 0.9rem;
     color: #202a33;
-    margin-top: 15px;
+    margin-top: 1rem;
+    line-height: 1.4;
 }
 
 .card-description {
-    margin-top: 10px;
+    margin-top: 0.6rem;
     display: -webkit-box;
-    -webkit-line-clamp: 2;      /* Número de líneas a mostrar antes de truncar */
+    -webkit-line-clamp: 2; /* limita a 2 líneas */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.card-content{
+.card-content {
+    position: relative;
     z-index: 10;
-    color: black;
+    color: #000;
+    padding: 1rem;
+}
+
+/* Opcional: para que la card tenga un hover sutil */
+.card:hover .card-content {
+    color: var(--color-terciario);
 }
 /* Contenedor del botón */
 .rent-button-container {
