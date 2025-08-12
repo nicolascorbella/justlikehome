@@ -1,13 +1,70 @@
 [
-    {
-        "id": 1,
-        "price": "400",
-        "status": "card",
-        "description": "depto ubicado en palermo",
-        "ambientes": "1",
-        "iframe": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52563.439742564246!2d-58.4622151039501!3d-34.573426428791045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb59c771eb933%3A0x6b3113b596d78c69!2sPalermo%2C%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1748547217163!5m2!1ses!2sar\" width=\"400\" height=\"300\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
-        "location": "Palermo 17/12/2024",
-        "img": "departamentos/palermo1/img1.webp",
-        "url": "https://departamentoslistados.42web.io/departamentos/palermo1/index.html?id=1"
-    }
+  {
+    "id": 1,
+    "price": "450",
+    "status": "card",
+    "description": "Departamento moderno ubicado en Alcorta.",
+    "ambientes": "3",
+    "iframe": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245...alcorta-map...\" width=\"400\" height=\"300\" style=\"border:0;\" allowfullscreen loading=\"lazy\"></iframe>",
+    "location": "Alcorta 123",
+    "img": "alcorta/img1.jpg",
+    "url": "https://departamentoslistados.42web.io/alcorta/index.html?id=1"
+  },
+  {
+    "id": 2,
+    "price": "300",
+    "status": "card",
+    "description": "Acogedor departamento en Araoz 655.",
+    "ambientes": "2",
+    "iframe": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245...araoz655-map...\" width=\"400\" height=\"300\" style=\"border:0;\" allowfullscreen loading=\"lazy\"></iframe>",
+    "location": "Araoz 655",
+    "img": "araoz655/img1.jpg",
+    "url": "https://departamentoslistados.42web.io/araoz655/index.html?id=2"
+  },
+  {
+    "id": 3,
+    "price": "280",
+    "status": "card",
+    "description": "Cómodo departamento en Arce 400.",
+    "ambientes": "2",
+    "iframe": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245...arce400-map...\" width=\"400\" height=\"300\" style=\"border:0;\" allowfullscreen loading=\"lazy\"></iframe>",
+    "location": "Arce 400",
+    "img": "arce400/img1.jpg",
+    "url": "https://departamentoslistados.42web.io/arce400/index.html?id=3"
+  },
+
+  {
+    "id": 5,
+    "price": "400",
+    "status": "card",
+    "description": "Amplio departamento en Conde 1150.",
+    "ambientes": "4",
+    "iframe": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245...conde1150-map...\" width=\"400\" height=\"300\" style=\"border:0;\" allowfullscreen loading=\"lazy\"></iframe>",
+    "location": "Conde 1150",
+    "img": "conde1150/img1.jpg",
+    "url": "https://departamentoslistados.42web.io/conde1150/index.html?id=5"
+  },
+  {
+    "id": 6,
+    "price": "320",
+    "status": "card",
+    "description": "Departamento de ejemplo en Ejemplodept.",
+    "ambientes": "2",
+    "iframe": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245...ejemplodept-map...\" width=\"400\" height=\"300\" style=\"border:0;\" allowfullscreen loading=\"lazy\"></iframe>",
+    "location": "Ejemplodept 101",
+    "img": "ejemplodept/img1.jpg",
+    "url": "https://departamentoslistados.42web.io/ejemplodept/index.html?id=6"
+  },
+
+  {
+    "id": 8,
+    "price": "275",
+    "status": "card",
+    "description": "Departamento pequeño en Lopez y Planes.",
+    "ambientes": "1",
+    "iframe": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245...lopezplanes-map...\" width=\"400\" height=\"300\" style=\"border:0;\" allowfullscreen loading=\"lazy\"></iframe>",
+    "location": "Lopez y Planes 55",
+    "img": "lopezplanes/img1.jpg",
+    "url": "https://departamentoslistados.42web.io/lopezplanes/index.html?id=8"
+  }
 ]
